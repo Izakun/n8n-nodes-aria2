@@ -12,5 +12,18 @@ Install via **Settings -> Community Nodes -> Install** -> `n8n-nodes-aria2`.
 ## Credentials
 Configure the base URL and authentication in the **aria2 API** credential.
 
+## Usage example
+
+Read global download stats:
+
+1. Add the node after a trigger (e.g. *When clicking 'Test workflow'*).
+2. Select your credential.
+3. **Get Global Stats**.
+4. Execute the node — example output:
+
+```json
+{ "numActive": "1", "numWaiting": "0", "downloadSpeed": "1048576", "uploadSpeed": "0" }
+```
+
 ## Disclaimer
 Not affiliated with or endorsed by the respective project.
