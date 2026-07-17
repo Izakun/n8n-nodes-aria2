@@ -14,9 +14,9 @@ import {
 
 export class Aria2 implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'aria2',
+		displayName: 'Aria2',
 		name: 'aria2',
-		icon: { light: 'file:aria2.svg', dark: 'file:aria2.svg' },
+		icon: { light: 'file:aria2.svg', dark: 'file:aria2.dark.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
