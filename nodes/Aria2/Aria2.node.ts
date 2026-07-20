@@ -78,7 +78,7 @@ export class Aria2 implements INodeType {
 					});
 				}
 
-				const response = (await this.helpers.httpRequest({
+				const response = (await this.helpers.httpRequestWithAuthentication.call(this, 'aria2Api', {
 					method: 'POST' as IHttpRequestMethods,
 					baseURL,
 					url: '/jsonrpc',

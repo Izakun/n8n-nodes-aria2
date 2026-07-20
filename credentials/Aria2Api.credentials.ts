@@ -1,4 +1,9 @@
-import { ICredentialTestRequest, ICredentialType, INodeProperties } from 'n8n-workflow';
+import {
+	IAuthenticateGeneric,
+	ICredentialTestRequest,
+	ICredentialType,
+	INodeProperties,
+} from 'n8n-workflow';
 
 export class Aria2Api implements ICredentialType {
 	name = 'aria2Api';
@@ -29,6 +34,14 @@ export class Aria2Api implements ICredentialType {
 			description: 'aria2 RPC secret token (--rpc-secret). Leave empty if none is set.',
 		},
 	];
+
+	// aria2's RPC secret is passed as the first JSON-RPC param ("token:<secret>"),
+	// not as a transport header, so there is nothing to inject here. This block
+	// exists so the node can use httpRequestWithAuthentication.
+	authenticate: IAuthenticateGeneric = {
+		type: 'generic',
+		properties: {},
+	};
 
 	// Validate the endpoint + secret with a lightweight aria2.getVersion call.
 	test: ICredentialTestRequest = {
