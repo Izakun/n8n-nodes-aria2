@@ -1,4 +1,4 @@
-import { ICredentialType, INodeProperties } from 'n8n-workflow';
+import { ICredentialTestRequest, ICredentialType, INodeProperties } from 'n8n-workflow';
 
 export class Aria2Api implements ICredentialType {
 	name = 'aria2Api';
@@ -29,4 +29,19 @@ export class Aria2Api implements ICredentialType {
 			description: 'aria2 RPC secret token (--rpc-secret). Leave empty if none is set.',
 		},
 	];
+
+	// Validate the endpoint + secret with a lightweight aria2.getVersion call.
+	test: ICredentialTestRequest = {
+		request: {
+			method: 'POST',
+			baseURL: '={{$credentials.baseUrl}}',
+			url: '/jsonrpc',
+			body: {
+				jsonrpc: '2.0',
+				id: 'n8n-credential-test',
+				method: 'aria2.getVersion',
+				params: '={{ $credentials.secret ? ["token:" + $credentials.secret] : [] }}',
+			},
+		},
+	};
 }
